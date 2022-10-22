@@ -28,7 +28,7 @@ export default function FuecComp ({ data }) {
           includeMargin={true}
           fgColor={'#5b211f'}
           size={200}
-          value={`http://localhost:3000/FuecComp/${id}`}/>
+          value={`https://app-rz-group-sa.vercel.app/FuecComp/${id}`}/>
           {loading && (
             <PDFDownloadLink document={<FuecTemplate name={data.driver[0].firstName + ' ' + data.driver[0].lastName}
                                                      service={data}/>} fileName='fuec.pdf'

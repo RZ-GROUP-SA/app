@@ -147,7 +147,7 @@ export default function ClientTravelsCard ({ estado, id, data }) {
             includeMargin={true}
             fgColor={'#5b211f'}
             size={250}
-            value={`${qrCodeDirection}/FuecComp/${id}`}/>
+            value={`https://app-rz-group-sa.vercel.app/FuecComp/${id}`}/>
         </div>
       </div>
     </div>
