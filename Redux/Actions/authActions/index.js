@@ -23,7 +23,13 @@ export function signUp (obj, router) {
       }, 2000)
     }).catch((err) => {
       // show a toast with the error
-      toast.error(err.response.data.msg)
+      if (err.response.data.msg.includes('idNumber')) {
+        toast.error('El número de identificación ya existe')
+      } else if (err.response.data.msg.includes('phoneNumber')) {
+        toast.error('El número de teléfono ya existe')
+      } else {
+        toast.error(err.response.data.msg)
+      }
     })
   }
 }
