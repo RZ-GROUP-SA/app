@@ -16,7 +16,7 @@ export default function users (data) {
 
   const confirmAction = () => {
     if (user.roles === 'client') {
-      axios.post(`https://rz-group-backend.herokuapp.com/api/payment/confirmClient/${id}`)
+      axios.post(`https://rz-group-backend-production.up.railway.app/api/payment/confirmClient/${id}`)
         .then(res => {
           console.log(res)
           console.log(user.roles)
@@ -27,7 +27,7 @@ export default function users (data) {
           router.reload()
         })
     } else if (user.roles === 'driver') {
-      return axios.post(`https://rz-group-backend.herokuapp.com/api/payment/confirmDriver/${id}`)
+      return axios.post(`https://rz-group-backend-production.up.railway.app/api/payment/confirmDriver/${id}`)
         .then(res => {
           console.log(res)
           console.log(res.data)
@@ -129,7 +129,7 @@ export default function users (data) {
 
 export async function getServerSideProps (context) {
   const { id } = context.query
-  const res = await fetch(`https://rz-group-backend.herokuapp.com/api/payment/${id}`)
+  const res = await fetch(`https://rz-group-backend-production.up.railway.app/api/payment/${id}`)
   const data = await res.json()
   return {
     props: {

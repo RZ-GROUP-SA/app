@@ -12,7 +12,7 @@ export function createService (payload, router) {
   return function (dispatch) {
     payload.asociateDriver
       ? toast.promise(
-        axios.post(`https://rz-group-backend.herokuapp.com/api/services/create/${payload.asociateDriver}`, payload), {
+        axios.post(`https://rz-group-backend-production.up.railway.app/api/services/create/${payload.asociateDriver}`, payload), {
           pending: 'Creando servicio...',
           success: 'Servicio creado con éxito',
           error: 'Error al crear servicio'
@@ -29,7 +29,7 @@ export function createService (payload, router) {
         toast.error(err.response.data)
       })
       : toast.promise(
-        axios.post('https://rz-group-backend.herokuapp.com/api/services/create', payload), {
+        axios.post('https://rz-group-backend-production.up.railway.app/api/services/create', payload), {
           pending: 'Creando servicio...',
           success: 'Servicio creado con éxito',
           error: 'Error al crear servicio'
@@ -48,7 +48,7 @@ export function createService (payload, router) {
 
 export function getServices () {
   return function (dispatch) {
-    axios.get('https://rz-group-backend.herokuapp.com/api/services/all')
+    axios.get('https://rz-group-backend-production.up.railway.app/api/services/all')
       .then(res => {
         dispatch({
           type: GET_SERVICES,
@@ -60,7 +60,7 @@ export function getServices () {
 
 export function getServicesUserId (id) {
   return function (dispatch) {
-    axios.get(`https://rz-group-backend.herokuapp.com/api/user/services/${id}`)
+    axios.get(`https://rz-group-backend-production.up.railway.app/api/user/services/${id}`)
       .then(res => {
         console.log(res.data)
         dispatch({
@@ -79,7 +79,7 @@ export function getServicesUserId (id) {
 
 export function getIncomingServices (id) {
   return function (dispatch) {
-    axios.get(`https://rz-group-backend.herokuapp.com/api/user/driver/${id}`)
+    axios.get(`https://rz-group-backend-production.up.railway.app/api/user/driver/${id}`)
       .then(res => {
         console.log(res.data)
         dispatch({
@@ -98,7 +98,7 @@ export function getIncomingServices (id) {
 
 export function getServiceId (id) {
   return function (dispatch) {
-    axios.get(`https://rz-group-backend.herokuapp.com/api/services/${id}`)
+    axios.get(`https://rz-group-backend-production.up.railway.app/api/services/${id}`)
       .then(res => {
         console.log(res.data)
         dispatch({
@@ -111,7 +111,7 @@ export function getServiceId (id) {
 
 export function updateService (id, payload) {
   return function (dispatch) {
-    axios.put(`https://rz-group-backend.herokuapp.com/api/services/${id}`, payload)
+    axios.put(`https://rz-group-backend-production.up.railway.app/api/services/${id}`, payload)
       .then(res => {
         dispatch({
           type: GET_SERVICES_OF_USER,
@@ -123,7 +123,7 @@ export function updateService (id, payload) {
 
 export function deleteService (id) {
   return function (dispatch) {
-    axios.delete(`https://rz-group-backend.herokuapp.com/api/services/${id}`)
+    axios.delete(`https://rz-group-backend-production.up.railway.app/api/services/${id}`)
       .then(res => {
         console.log(res)
         dispatch({
@@ -136,7 +136,7 @@ export function deleteService (id) {
 
 export function cancelService (id) {
   return function (dispatch) {
-    toast.promise(axios.post(`https://rz-group-backend.herokuapp.com/api/services/cancel/${id}`), {
+    toast.promise(axios.post(`https://rz-group-backend-production.up.railway.app/api/services/cancel/${id}`), {
       pending: 'Cancelando servicio...',
       success: 'Servicio cancelado con éxito',
       error: 'Error al cancelar servicio'

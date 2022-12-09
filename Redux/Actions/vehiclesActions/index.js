@@ -9,7 +9,7 @@ export const GET_ALL_VEHICLES = 'GET_ALL_VEHICLES'
 
 export function createVehicle (obj, router) {
   return function (dispatch) {
-    axios.post('https://rz-group-backend.herokuapp.com/api/vehicles/create', obj)
+    axios.post('https://rz-group-backend-production.up.railway.app/api/vehicles/create', obj)
       .then(res => {
         console.log(res.data)
         dispatch({
@@ -30,7 +30,7 @@ export function createVehicle (obj, router) {
 
 export function getVehicleById (id) {
   return function (dispatch) {
-    axios.get(`https://rz-group-backend.herokuapp.com/api/vehicles/${id}`)
+    axios.get(`https://rz-group-backend-production.up.railway.app/api/vehicles/${id}`)
       .then(res => {
         dispatch({
           type: GET_VEHICLE_BY_ID,
@@ -44,7 +44,7 @@ export function getVehicleById (id) {
 
 export function updateVehicle (id, obj, router) {
   return function (dispatch) {
-    axios.put('https://rz-group-backend.herokuapp.com/api/vehicles/' + id, obj)
+    axios.put('https://rz-group-backend-production.up.railway.app/api/vehicles/' + id, obj)
       .then(res => {
         console.log(res.data)
         dispatch({
@@ -64,7 +64,7 @@ export function updateVehicle (id, obj, router) {
 
 export function deleteVehicle (id, router) {
   return function (dispatch) {
-    axios.delete('https://rz-group-backend.herokuapp.com/api/vehicles/' + id)
+    axios.delete('https://rz-group-backend-production.up.railway.app/api/vehicles/' + id)
       .then(res => {
         console.log(res.data)
         dispatch({
@@ -84,7 +84,7 @@ export function deleteVehicle (id, router) {
 
 export function getVehiclesByUser (id) {
   return function (dispatch) {
-    axios.get(`https://rz-group-backend.herokuapp.com/api/user/vehicles/${id}`)
+    axios.get(`https://rz-group-backend-production.up.railway.app/api/user/vehicles/${id}`)
       .then(res => {
         console.log(res)
         dispatch({
@@ -99,7 +99,7 @@ export function getVehiclesByUser (id) {
 
 export function getAllVehicles () {
   return function (dispatch) {
-    axios.get('https://rz-group-backend.herokuapp.com/api/vehicles/all')
+    axios.get('https://rz-group-backend-production.up.railway.app/api/vehicles/all')
       .then(res => {
         dispatch({
           type: GET_ALL_VEHICLES,

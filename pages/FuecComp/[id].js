@@ -44,7 +44,7 @@ export default function FuecComp ({ data }) {
 }
 
 export async function getServerSideProps (context) {
-  const res = await fetch(`https://rz-group-backend.herokuapp.com/api/services/${context.query.id}`)
+  const res = await fetch(`https://rz-group-backend-production.up.railway.app/api/services/${context.query.id}`)
   const data = await res.json()
   console.log(data)
   return {

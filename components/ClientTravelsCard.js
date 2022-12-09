@@ -41,7 +41,7 @@ export default function ClientTravelsCard ({ estado, id, data }) {
   }
 
   const showPopup = (id) => {
-    axios.get(`https://rz-group-backend.herokuapp.com/api/user/chooseVehicle/${user.id}`)
+    axios.get(`https://rz-group-backend-production.up.railway.app/api/user/chooseVehicle/${user.id}`)
       .then(res => {
         console.log(res.data)
         setVehicles(res.data)
@@ -57,7 +57,7 @@ export default function ClientTravelsCard ({ estado, id, data }) {
     if (!selectedVehicle) {
       return toast.error('Seleccione un vehiculo')
     }
-    axios.post(`https://rz-group-backend.herokuapp.com/api/admin/service/confirm/${selectedTravel}`, {
+    axios.post(`https://rz-group-backend-production.up.railway.app/api/admin/service/confirm/${selectedTravel}`, {
       vehicleId: selectedVehicle,
       driverId: user.id,
       QR_code: qrCode
@@ -73,7 +73,7 @@ export default function ClientTravelsCard ({ estado, id, data }) {
   }
 
   const RechazarViaje = async (id) => {
-    axios.post(`https://rz-group-backend.herokuapp.com/api/services/cancel/${id}`)
+    axios.post(`https://rz-group-backend-production.up.railway.app/api/services/cancel/${id}`)
       .then(res => {
         toast.success('Viaje rechazado')
         setTimeout(() => {

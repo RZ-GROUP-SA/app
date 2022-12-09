@@ -84,7 +84,7 @@ export default function Fuec({datosFiltrados}) {
 
   const findAllDrivers = () => {
     setLoading2(true)
-    axios.get('https://rz-group-backend.herokuapp.com/api/user?skip=0&limit=100')
+    axios.get('https://rz-group-backend-production.up.railway.app/api/user?skip=0&limit=100')
       .then(res => {
         console.log(res.data.data)
         setAllDrivers(res.data.data.filter(driver => driver.roles[0].name === 'driver' && driver.isAproved === 'aproved'))
@@ -94,7 +94,7 @@ export default function Fuec({datosFiltrados}) {
 
   const handleSearchDrivers = () => {
     setLoading(true)
-    axios.get(`https://rz-group-backend.herokuapp.com/api/company/drivers/${user.companyAllied._id}`)
+    axios.get(`https://rz-group-backend-production.up.railway.app/api/company/drivers/${user.companyAllied._id}`)
       .then((res) => {
         console.log('datota', res)
         setDriversMap(res.data.driversAllied.map(e => {
@@ -112,7 +112,7 @@ export default function Fuec({datosFiltrados}) {
       })
   }
   const handleAddNewDriver = () => {
-    axios.post(`https://rz-group-backend.herokuapp.com/api/company/addDriver/${user.companyAllied._id}`, { userId: selectedNewDriver })
+    axios.post(`https://rz-group-backend-production.up.railway.app/api/company/addDriver/${user.companyAllied._id}`, { userId: selectedNewDriver })
       .then((res) => {
         console.log(res.data)
         toast.success('Conductor agregado correctamente')
@@ -444,7 +444,7 @@ export default function Fuec({datosFiltrados}) {
 }
 
 export async function getServerSideProps () {
-  const res = await fetch('https://rz-group-backend.herokuapp.com/api/user?skip=0&limit=50')
+  const res = await fetch('https://rz-group-backend-production.up.railway.app/api/user?skip=0&limit=50')
   const datos = await res.json()
   const datosFiltrados = await datos.data.filter((item) => item.isAproved === 'aproved')
   console.log(datosFiltrados)

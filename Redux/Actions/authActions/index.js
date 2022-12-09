@@ -9,7 +9,7 @@ export const RECOVER_PASSWORD = 'RECOVER_PASSWORD'
 
 export function signUp (obj, router) {
   return function (dispatch) {
-    toast.promise(axios.post('https://rz-group-backend.herokuapp.com/api/auth/signup', obj), {
+    toast.promise(axios.post('https://rz-group-backend-production.up.railway.app/api/auth/signup', obj), {
       pending: 'Cargando...',
       success: 'Usuario creado con éxito',
       error: 'Error al crear usuario'
@@ -36,7 +36,7 @@ export function signUp (obj, router) {
 export function signIn (obj, router) {
   return function (dispatch) {
     toast.promise(
-      axios.post('https://rz-group-backend.herokuapp.com/api/auth/signin', obj), {
+      axios.post('https://rz-group-backend-production.up.railway.app/api/auth/signin', obj), {
         pending: 'Iniciando sesión...',
         success: 'Sesión iniciada con éxito',
         error: 'Error al iniciar sesión'
@@ -85,7 +85,7 @@ export function signOut () {
 
 export function sendOTP (obj, router = null) {
   return function (dispatch) {
-    axios.post('https://rz-group-backend.herokuapp.com/api/auth/sendOTP', obj)
+    axios.post('https://rz-group-backend-production.up.railway.app/api/auth/sendOTP', obj)
       .then(res => {
         dispatch({
           type: SEND_OTP
@@ -101,7 +101,7 @@ export function sendOTP (obj, router = null) {
 
 export function verifyEmail (obj, router) {
   return function (dispatch) {
-    toast.promise(axios.post('https://rz-group-backend.herokuapp.com/api/auth/verify', obj), {
+    toast.promise(axios.post('https://rz-group-backend-production.up.railway.app/api/auth/verify', obj), {
       pending: 'Verificando...',
       success: 'Email verificado con éxito',
       error: 'Error al verificar email'
@@ -122,7 +122,7 @@ export function verifyEmail (obj, router) {
 
 export function recoverPassword (obj, router) {
   return function (dispatch) {
-    axios.post('https://rz-group-backend.herokuapp.com/api/auth/recovery', obj)
+    axios.post('https://rz-group-backend-production.up.railway.app/api/auth/recovery', obj)
       .then(res => {
         dispatch({
           type: RECOVER_PASSWORD

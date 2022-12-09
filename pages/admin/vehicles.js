@@ -10,7 +10,7 @@ export default function vehicles ({ data }) {
   const [search, setSearch] = React.useState('')
   const [searchData, setSearchData] = React.useState([])
   useEffect(() => {
-    fetch('https://rz-group-backend.herokuapp.com/api/admin/vehicle/search?carPlate=' + search)
+    fetch('https://rz-group-backend-production.up.railway.app/api/admin/vehicle/search?carPlate=' + search)
       .then(res => res.json())
       .then(data => {
         setSearchData(data)
@@ -132,7 +132,7 @@ export default function vehicles ({ data }) {
 }
 
 export async function getServerSideProps (context) {
-  const res = await fetch(`https://rz-group-backend.herokuapp.com/api/admin/vehicles?skip=${context.query.page - 1}&limit=10`)
+  const res = await fetch(`https://rz-group-backend-production.up.railway.app/api/admin/vehicles?skip=${context.query.page - 1}&limit=10`)
   const data = await res.json()
   console.log(data)
   return {

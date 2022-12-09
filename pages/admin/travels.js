@@ -69,7 +69,7 @@ export default function travels ({ data }) {
 }
 
 export async function getServerSideProps (context) {
-  const res = await fetch(`https://rz-group-backend.herokuapp.com/api/admin/services?skip=${context.query.page - 1}&limit=10`)
+  const res = await fetch(`https://rz-group-backend-production.up.railway.app/api/admin/services?skip=${context.query.page - 1}&limit=10`)
   const data = await res.json()
   console.log(data)
   return {

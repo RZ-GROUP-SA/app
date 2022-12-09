@@ -11,7 +11,7 @@ export default function users ({ data }) {
   const [search, setSearch] = React.useState('')
   const [searchData, setSearchData] = React.useState([])
   useEffect(() => {
-    search.length >= 4 && fetch('https://rz-group-backend.herokuapp.com/api/admin/user/search?fullName=' + search)
+    search.length >= 4 && fetch('https://rz-group-backend-production.up.railway.app/api/admin/user/search?fullName=' + search)
       .then(res => res.json())
       .then(data => {
         setSearchData(data)
@@ -161,7 +161,7 @@ export default function users ({ data }) {
 }
 
 export async function getServerSideProps (context) {
-  const res = await fetch(`https://rz-group-backend.herokuapp.com/api/user?skip=${context.query.page - 1}&limit=10`)
+  const res = await fetch(`https://rz-group-backend-production.up.railway.app/api/user?skip=${context.query.page - 1}&limit=10`)
   const data = await res.json()
   console.log(data)
   return {

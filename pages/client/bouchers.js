@@ -23,7 +23,7 @@ export default function travels ({ data }) {
   const [unpaid, setUnpaid] = useState([])
 
   useEffect(() => {
-    axios.get(`https://rz-group-backend.herokuapp.com/api/payment/client/unpaid/${user._id}`)
+    axios.get(`https://rz-group-backend-production.up.railway.app/api/payment/client/unpaid/${user._id}`)
       .then(res => {
         setUnpaid(res.data)
       })

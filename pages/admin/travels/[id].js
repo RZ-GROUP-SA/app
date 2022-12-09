@@ -23,7 +23,7 @@ export default function travels({data, data3}) {
     if (!selectedDriver) {
       return toast.error('No se ha seleccionado un conductor')
     }
-    axios.post(`https://rz-group-backend.herokuapp.com/api/admin/service/driver/${id}`, {
+    axios.post(`https://rz-group-backend-production.up.railway.app/api/admin/service/driver/${id}`, {
       driverId: selectedDriver
     }).then(res => {
       console.log(res)
@@ -36,7 +36,7 @@ export default function travels({data, data3}) {
 
   const confirmAction = (id) => {
     console.log(id)
-    axios.post(`https://rz-group-backend.herokuapp.com/api/payment/confirmAdmin/${id}`,)
+    axios.post(`https://rz-group-backend-production.up.railway.app/api/payment/confirmAdmin/${id}`,)
       .then(res => {
         toast.success('Viaje finalizado con éxito')
       }).catch(err => {
@@ -157,8 +157,8 @@ export default function travels({data, data3}) {
 
 export async function getServerSideProps(context) {
   const {id} = context.query
-  const res = await fetch(`https://rz-group-backend.herokuapp.com/api/services/${id}`)
-  const res2 = await fetch('https://rz-group-backend.herokuapp.com/api/user?skip=0&limit=100')
+  const res = await fetch(`https://rz-group-backend-production.up.railway.app/api/services/${id}`)
+  const res2 = await fetch('https://rz-group-backend-production.up.railway.app/api/user?skip=0&limit=100')
   const data = await res.json()
   const data2 = await res2.json()
   const data3 = data2.data.filter(driver => driver.roles[0].name === 'driver' && driver.isAproved === 'aproved')

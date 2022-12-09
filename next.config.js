@@ -23,6 +23,6 @@ module.exports = withPWA({
 
 /* module.exports = {
   env: {
-    API_URL: 'https://rz-group-backend.herokuapp.com/'
+    API_URL: 'https://rz-group-backend-production.up.railway.app/'
   },
 } */

@@ -40,7 +40,7 @@ export default function Validation () {
   }, [])
 
   useEffect(() => {
-    axios.get(`https://rz-group-backend.herokuapp.com/api/vehicles/${id}`)
+    axios.get(`https://rz-group-backend-production.up.railway.app/api/vehicles/${id}`)
       .then(res => {
         setStatus(res.data.isAproved)
         status === 'aproved' && router.push('/Main')
@@ -88,7 +88,7 @@ export default function Validation () {
     formData.append('soat', file3)
     formData.append('propertyCardFront', file4)
     formData.append('propertyCardBack', file5)
-    axios.post(`https://rz-group-backend.herokuapp.com/api/vehicles/upload/${id}`, formData, {
+    axios.post(`https://rz-group-backend-production.up.railway.app/api/vehicles/upload/${id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }

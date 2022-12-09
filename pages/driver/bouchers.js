@@ -28,7 +28,7 @@ export default function travels ({ data }) {
   const [unpaid, setUnpaid] = useState([])
 
   useEffect(() => {
-    axios.get(`https://rz-group-backend.herokuapp.com/api/payment/driver/unpaid/${user.id}`)
+    axios.get(`https://rz-group-backend-production.up.railway.app/api/payment/driver/unpaid/${user.id}`)
       .then(res => {
         setUnpaid(res.data.data)
       })
@@ -40,7 +40,7 @@ export default function travels ({ data }) {
 
   const handleSearchDebt = () => {
     setLoading(true)
-    axios.get(`https://rz-group-backend.herokuapp.com/api/payment/debt/${user.id}`)
+    axios.get(`https://rz-group-backend-production.up.railway.app/api/payment/debt/${user.id}`)
       .then(res => {
         setDebt(res.data)
         setPopUp(true)

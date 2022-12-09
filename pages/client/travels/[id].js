@@ -110,7 +110,7 @@ export default function users ({ data }) {
         ...paid,
         isPaid: true
       })
-      return axios.post('https://rz-group-backend.herokuapp.com/api/payment/create/' + service._id, paid)
+      return axios.post('https://rz-group-backend-production.up.railway.app/api/payment/create/' + service._id, paid)
         .then(res => {
           toast.success('Pago enviado correctamente', {
             position: 'top-center',
@@ -127,7 +127,7 @@ export default function users ({ data }) {
         })
         .catch(err => console.log(err))
     }
-    axios.post('https://rz-group-backend.herokuapp.com/api/payment/create/' + service._id, paid)
+    axios.post('https://rz-group-backend-production.up.railway.app/api/payment/create/' + service._id, paid)
       .then(res => {
         toast.success('Pago enviado correctamente', {
           position: 'top-center',

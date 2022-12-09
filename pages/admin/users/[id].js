@@ -19,7 +19,7 @@ export default function users ({ data }) {
   })
   const deleteUser = async (id) => {
     console.log(id)
-    axios.delete('https://rz-group-backend.herokuapp.com/api/user/' + id)
+    axios.delete('https://rz-group-backend-production.up.railway.app/api/user/' + id)
       .then(res => {
         console.log(res.data)
         router.push('/admin/users')
@@ -27,7 +27,7 @@ export default function users ({ data }) {
   }
   const aprobateUser = async (id) => {
     console.log(id)
-    axios.post('https://rz-group-backend.herokuapp.com/api/admin/approve/' + id)
+    axios.post('https://rz-group-backend-production.up.railway.app/api/admin/approve/' + id)
       .then(res => {
         console.log(res)
         router.reload()
@@ -35,7 +35,7 @@ export default function users ({ data }) {
   }
   const desaprobateUser = async (id) => {
     console.log(id)
-    axios.post('https://rz-group-backend.herokuapp.com/api/admin/reject/' + id, {
+    axios.post('https://rz-group-backend-production.up.railway.app/api/admin/reject/' + id, {
       message: reason
     })
       .then(res => {
@@ -53,7 +53,7 @@ export default function users ({ data }) {
   }
   const handleModificacion = (e, id) => {
     e.preventDefault()
-    axios.put('https://rz-group-backend.herokuapp.com/api/user/' + data._id, userEdit)
+    axios.put('https://rz-group-backend-production.up.railway.app/api/user/' + data._id, userEdit)
       .then(res => {
         console.log(res)
         router.reload()
@@ -221,7 +221,7 @@ export default function users ({ data }) {
 }
 
 export async function getServerSideProps (context) {
-  const res = await fetch('https://rz-group-backend.herokuapp.com/api/user/' + context.query.id)
+  const res = await fetch('https://rz-group-backend-production.up.railway.app/api/user/' + context.query.id)
   const data = await res.json()
   console.log(data)
   return {

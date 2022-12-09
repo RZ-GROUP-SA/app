@@ -94,7 +94,7 @@ export default function Fuec({datosFiltrados}) {
       alert('Please fill in all the required fields')
     } else {
       // for (let i = 0; i < Number(input.number_vehicles); i++) {
-      axios.post(`https://rz-group-backend.herokuapp.com/api/services/createExt/${user.id}`, input)
+      axios.post(`https://rz-group-backend-production.up.railway.app/api/services/createExt/${user.id}`, input)
         .then(res => {
           console.log(res)
           toast.success('Viaje creado')
@@ -357,7 +357,7 @@ export default function Fuec({datosFiltrados}) {
 // }
 
 export async function getServerSideProps () {
-  const res = await fetch('https://rz-group-backend.herokuapp.com/api/user?skip=0&limit=50')
+  const res = await fetch('https://rz-group-backend-production.up.railway.app/api/user?skip=0&limit=50')
   const datos = await res.json()
   const datosFiltrados = await datos.data.filter((item) => item.isAproved === 'aproved')
   console.log(datosFiltrados)

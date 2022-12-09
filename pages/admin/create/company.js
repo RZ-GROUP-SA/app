@@ -67,7 +67,7 @@ export default function companyCreate () {
 
   const handleSubmit = async () => {
     if (naturalPerson) {
-      axios.post('https://rz-group-backend.herokuapp.com/api/company/create', {
+      axios.post('https://rz-group-backend-production.up.railway.app/api/company/create', {
         ...naturalPersonForm,
         name: `${naturalPersonForm.name.toUpperCase()}`,
         last_name: `${naturalPersonForm.last_name.toUpperCase()}`
@@ -76,7 +76,7 @@ export default function companyCreate () {
           toast.success('Persona agregada con éxito')
         })
     } else if (company) {
-      axios.post('https://rz-group-backend.herokuapp.com/api/company/create', {
+      axios.post('https://rz-group-backend-production.up.railway.app/api/company/create', {
         ...companyForm,
         name: `${companyForm.name.toUpperCase()}`
       })

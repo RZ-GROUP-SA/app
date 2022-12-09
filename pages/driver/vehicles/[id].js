@@ -27,7 +27,7 @@ export default function users ({ data }) {
 
   const autorizacionTab = () => {
     setTab(1)
-    axios.get('https://rz-group-backend.herokuapp.com/api/user?skip=0&limit=100')
+    axios.get('https://rz-group-backend-production.up.railway.app/api/user?skip=0&limit=100')
       .then(res => {
         console.log(res.data.data)
         setConductores(res?.data?.data?.filter(driver => driver?.roles[0]?.name === 'driver' && driver?.isAproved === 'aproved').map(e => {
@@ -44,7 +44,7 @@ export default function users ({ data }) {
 
   const quitarAutorizacionTab = () => {
     setTab(2)
-    axios.get(`https://rz-group-backend.herokuapp.com/api/user/authDrivers/${user.id}`)
+    axios.get(`https://rz-group-backend-production.up.railway.app/api/user/authDrivers/${user.id}`)
       .then(res => {
         console.log('asd', res.data)
         setConductores(res?.data?.map(e => {
@@ -61,7 +61,7 @@ export default function users ({ data }) {
   const desautorizacion = (e) => {
     e.preventDefault()
     console.log(input)
-    axios.post(`https://rz-group-backend.herokuapp.com/api/user/unAuthDriver/${user.id}`, input)
+    axios.post(`https://rz-group-backend-production.up.railway.app/api/user/unAuthDriver/${user.id}`, input)
       .then(res => {
         console.log(res)
         setTab(0)
@@ -73,7 +73,7 @@ export default function users ({ data }) {
   const autorizacion = (e) => {
     e.preventDefault()
     console.log(input)
-    axios.post(`https://rz-group-backend.herokuapp.com/api/user/addDriver/${user.id}`, input)
+    axios.post(`https://rz-group-backend-production.up.railway.app/api/user/addDriver/${user.id}`, input)
       .then(res => {
         console.log(res)
         setTab(0)
@@ -183,7 +183,7 @@ export default function users ({ data }) {
 }
 
 export async function getServerSideProps (context) {
-  const res = await fetch('https://rz-group-backend.herokuapp.com/api/vehicles/' + context.query.id)
+  const res = await fetch('https://rz-group-backend-production.up.railway.app/api/vehicles/' + context.query.id)
   const data = await res.json()
   console.log(data)
   return {

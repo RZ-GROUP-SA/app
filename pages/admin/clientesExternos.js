@@ -90,7 +90,7 @@ export default function clientesExternos ({ data }) {
 // </div>
 
 export async function getServerSideProps (context) {
-  const res = await fetch(`https://rz-group-backend.herokuapp.com/api/extclient/?skip=${context.query.page - 1}&limit=10`)
+  const res = await fetch(`https://rz-group-backend-production.up.railway.app/api/extclient/?skip=${context.query.page - 1}&limit=10`)
   const data = await res.json()
   console.log(data)
   return {
