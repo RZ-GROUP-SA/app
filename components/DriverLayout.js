@@ -14,22 +14,24 @@ export default function DriverLayout () {
   const dispatch = useDispatch()
   const { user, services } = useSelector(state => state)
   useEffect(() => {
-    if (!services.length) {
-      dispatch(getIncomingServices(user.id))
+    if (!services?.length) {
+      dispatch(getIncomingServices(user?.id))
     }
   }, [user])
   useEffect(() => {
-    const pendingService = services.find(service => service.status === 'pending')
-    if (pendingService) {
-      toast.info('Tienes nuevos servicios pendientes', {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined
-      })
+    if (services?.length === 0) {
+      const pendingService = services?.find(service => service?.status === 'pending')
+      if (pendingService) {
+        toast.info('Tienes nuevos servicios pendientes', {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined
+        })
+      }
     }
   }, [services])
   return (
