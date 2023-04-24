@@ -60,7 +60,7 @@ export default function users ({ data }) {
               data.isAproved === 'aproved' ? <h1 className={'bg-green-500'}>Estado: Aprobado</h1> : null
             }
           </div>
-          <h1>Matricula: {data.carPlate.toUpperCase()}</h1>
+          <h1>Placa: {data.carPlate.toUpperCase()}</h1>
           <h1>Tipo: {data.type}</h1>
           <h1>Categoria: {data.category}</h1>
           <h1>Capacidad: {data.capacity}</h1>

@@ -10,11 +10,15 @@ export default function vehicles ({ data }) {
   const [search, setSearch] = React.useState('')
   const [searchData, setSearchData] = React.useState([])
   useEffect(() => {
-    fetch('https://rz-group-backend-production.up.railway.app/api/admin/vehicle/search?carPlate=' + search)
-      .then(res => res.json())
-      .then(data => {
-        setSearchData(data)
-      })
+    if (search !== '') {
+      fetch('https://rz-group-backend-production.up.railway.app/api/admin/vehicle/search?carPlate=' + search)
+        .then((res) => res.json())
+        .then((data) => {
+          setSearchData(data)
+        })
+    } else {
+      setSearchData([])
+    }
   }, [search])
 
   const handleSearch = (e) => {
@@ -24,6 +28,7 @@ export default function vehicles ({ data }) {
     page.selected > 0 && router.push(`/admin/vehicles?page=${page.selected + 1}`)
   }
 
+  console.log(data)
   return (
     <MobileLayout>
       <div className={'md:shadow-2xl bg-[#F7F8FA] h-fit flex items-center flex-col'}>
@@ -33,7 +38,7 @@ export default function vehicles ({ data }) {
             <input
               className={'m-5 text-center h-[70px] w-full rounded-full border-2 border-blue-500'}
               type={'search'}
-              placeholder={'Buscar vehiculo por MATRICULA'}
+              placeholder={'Buscar vehiculo por Placa'}
               value={search}
               onChange={(e) => handleSearch(e)}
             />
@@ -65,9 +70,10 @@ export default function vehicles ({ data }) {
                     <ul>
                       <li className={''}>Marca: {vehicle.brand}</li>
                       <li className={''}>Modelo: {vehicle.model}</li>
-                      <li className={''}>Matricula: {vehicle.carPlate}</li>
+                      <li className={''}>Placa: {vehicle.carPlate}</li>
                       <li className={''}>Categoría: {vehicle.category}</li>
-                      <li className={''}>Fecha de subida: {vehicle?.createdAt?.slice(0, 10)}</li>
+                      <li className={''}>Fecha de Inscripción: {vehicle?.createdAt?.slice(0, 10)}</li>
+                      <li className={''}>Telefono del Dueño: {owner?.phoneNumber}</li>
                     </ul>
                   </div>
                 </div>
@@ -100,9 +106,10 @@ export default function vehicles ({ data }) {
                       <ul>
                         <li className={''}>Marca: {vehicle.brand}</li>
                         <li className={''}>Modelo: {vehicle.model}</li>
-                        <li className={''}>Matricula: {vehicle.carPlate}</li>
+                        <li className={''}>Placa: {vehicle.carPlate}</li>
                         <li className={''}>Categoría: {vehicle.category}</li>
-                        <li className={''}>Fecha de subida: {vehicle?.createdAt?.slice(0, 10)}</li>
+                        <li className={''}>Fecha de Inscripción: {vehicle?.createdAt?.slice(0, 10)}</li>
+                        <li className={''}>Telefono del Dueño: {owner?.phoneNumber}</li>
                       </ul>
                     </div>
                   </div>

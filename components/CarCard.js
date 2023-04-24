@@ -20,7 +20,7 @@ export default function CarCard ({ id, brand, model, year, plate, aprobado }) {
         </div>
         <div className={''}>
           <h3>Año: {year}</h3>
-          <h3>Matricula: {plate}</h3>
+          <h3>Placa: {plate}</h3>
         </div>
       </div>
     </div>

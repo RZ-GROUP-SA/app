@@ -31,6 +31,11 @@ function validate (input) {
   } else if (input.to.trim() === '') {
     errors.to = 'Destination is invalid'
   }
+  if (!input.number_passengers) {
+    errors.number_passengers = 'Number of passengers is required'
+  } else if (input.number_passengers.trim() === '') {
+    errors.to = 'Destination is invalid'
+  }
   return errors
 }
 
@@ -67,6 +72,7 @@ export default function Fuec({datosFiltrados}) {
       start_date: '',
       end_date: '',
       number_vehicles: '',
+      number_passengers: '',
       duration: '',
       serviceType: '',
       start_time: '',
@@ -199,6 +205,7 @@ export default function Fuec({datosFiltrados}) {
             />
           </div>
           <div className={'w-full m-2'}>
+          <p className={'indent-3 font-bold text-black'}>Fecha de inicio</p>
             <input type={'date'}
                    placeholder={'Fecha Inicio'}
                    className={'pl-5 pr-5 outline-0 w-full rounded-[25px] h-[50px] font-bold text-black bg-[#F4F5F7]'}
@@ -208,6 +215,7 @@ export default function Fuec({datosFiltrados}) {
             />
           </div>
           <div className={'w-full m-2'}>
+          <p className={'indent-3 font-bold text-black'}>Fecha final</p>
             <input type={'date'}
                    className={'pl-5 pr-5 outline-0 w-full rounded-[25px] h-[50px] font-bold text-black bg-[#F4F5F7]'}
                    onChange={(e) => handleInputChange(e)}
@@ -217,7 +225,7 @@ export default function Fuec({datosFiltrados}) {
           </div>
           <div className={'w-full m-2'}>
             <label>
-              <p className={'indent-3 font-bold text-black'}>Hora de llegada</p>
+              <p className={'indent-3 font-bold text-black'}>Hora de recogida</p>
               <input placeholder={'Hora de llegada'}
                      className={'indent-1 outline-0 w-full rounded-[25px] h-[50px] font-bold text-black bg-[#F4F5F7]'}
                      onChange={(e) => handleInputChange(e)}
@@ -225,6 +233,22 @@ export default function Fuec({datosFiltrados}) {
                      type={'time'}
                      value={input.start_time.toString()}
               />
+            </label>
+          </div>
+          <div className={'w-full m-2'}>
+            <label>
+            <input placeholder={'Cantidad de Pasajeros'}
+                   className={'indent-5 outline-0 w-full rounded-[25px] h-[50px] font-bold text-black bg-[#F4F5F7]'}
+                   onChange={(e) => handleInputChange(e)}
+                   name={'number_passengers'}
+                   type={'number'}
+                   onKeyPress={(e) => {
+                     if (!/[0-9]/.test(e.key)) {
+                       e.preventDefault()
+                     }
+                   }}
+                   value={input.number_passengers.toString()}
+            />
             </label>
           </div>
           <div className={'w-full m-2 flex flex-col justify-center items-center'}>
