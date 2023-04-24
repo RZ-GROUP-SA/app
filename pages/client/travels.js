@@ -79,7 +79,7 @@ export default function travels({data}) {
                             subTab === 2 &&
                             <div className={'flex flex-col justify-center w-full items-center'}>
                               {services?.filter(e => e.status === 'pending').length === 0
-                                ? <h1 className={'text-2xl font-bold'}>¡No tienes servicios en marcha!</h1>
+                                ? <h1 className={'text-2xl font-bold'}>¡No tienes servicios pendientes!</h1>
                                 : services?.filter(e => e.status === 'pending')?.map((item, index) =>
                                   <ClientTravelsCard key={index} id={item._id} data={item}/>
                                 )}

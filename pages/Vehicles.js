@@ -75,9 +75,9 @@ export default function AddVehicle () {
                       <ul>
                         <li className={''}>Marca: {vehicle.brand}</li>
                         <li className={''}>Modelo: {vehicle.model}</li>
-                        <li className={''}>Matricula: {vehicle.carPlate}</li>
+                        <li className={''}>Placa: {vehicle.carPlate}</li>
                         <li className={''}>Categoría: {vehicle.category}</li>
-                        <li className={''}>Fecha de subida: {vehicle?.createdAt?.slice(0, 10)}</li>
+                        <li className={''}>Fecha de Inscripción: {vehicle?.createdAt?.slice(0, 10)}</li>
                       </ul>
                     </div>
                   </div>
