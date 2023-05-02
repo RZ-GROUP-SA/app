@@ -10,8 +10,12 @@ export default function users ({ data }) {
   const router = useRouter()
   const [search, setSearch] = React.useState('')
   const [searchData, setSearchData] = React.useState([])
+  const [filter, setFilter] = React.useState({
+    isAproved: '',
+    roles: ''
+  })
   useEffect(() => {
-    search.length >= 4 && fetch('https://rz-group-backend-production.up.railway.app/api/admin/user/search?fullName=' + search)
+    search.length >= 4 && fetch('http://localhost:3001/api/admin/user/search?fullName=' + search)
       .then(res => res.json())
       .then(data => {
         setSearchData(data)
@@ -20,13 +24,43 @@ export default function users ({ data }) {
       setSearchData([])
     }
   }, [search])
-  console.log(searchData)
+  useEffect(() => {
+    if (filter.isAproved !== '' || filter.roles !== '') {
+      router.push(
+        `/admin/users?page=0&limit=10&isAproved=${filter.isAproved}&roles=${filter.roles}`
+      )
+      console.log(searchData)
+    }
+  }, [filter])
+
   const handlePagination = (page) => {
-    router.push(`/admin/users?page=${page.selected + 1}`)
+    router.push(`/admin/users?page=${page.selected + 1}&limit=10&isAproved=${filter.isAproved}&roles=${filter.roles}`)
   }
 
   const handleSearch = (e) => {
     setSearch(e.target.value)
+  }
+  const handleFilter = (e) => {
+    setFilter({
+      ...filter,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleFilterStatus = (e) => {
+    setFilter({
+      ...filter,
+      [e.target.name]: e.target.value,
+      roles: '63018b285664266108a055f0'
+    })
+  }
+
+  const clearFilter = () => {
+    setFilter({
+      isAproved: '',
+      roles: ''
+    })
+    router.push(`/admin/users?page=0&limit=10&isAproved=&roles=`)
   }
 
   return (
@@ -43,7 +77,32 @@ export default function users ({ data }) {
               onChange={(e) => handleSearch(e)}
             />
           </div>
-          {searchData.length > 0
+          <div className={'flex justify-center w-full items-center'}>
+          <select className={'m-5 text-center h-10 w-full rounded-full border-2 border-blue-500'}
+                    onChange={(e) => handleFilter(e)}
+                    name={'roles'}
+                    value={filter.roles}
+            >
+              <option value={''}>Rol</option>
+              <option value={'63018b285664266108a055ee'}>Cliente</option>
+              <option value={'63018b285664266108a055ed'}>Admin</option>
+              <option value={'63018b285664266108a055f0'}>Conductor</option>
+              </select>
+              <select className={'m-5 text-center h-10 w-full rounded-full border-2 border-blue-500'}
+                   onChange={(e) => handleFilterStatus(e)}
+                   name={'isAproved'}
+                   value={filter.isAproved}
+            >
+              <option value={''}>Estado</option>
+              <option value={'aproved'}>Aprobado</option>
+              <option value={'inReview'}>En revisión</option>
+              <option value={'notAproved'}>No aprobado</option>
+              </select>
+              <button className={'m-5 text-center h-10 w-full rounded-full border-2 border-blue-500'}
+                      onClick={() => clearFilter()}
+              >Limpiar filtros</button>
+          </div>
+          {searchData?.length > 0
             ? searchData?.map((user, index) => {
               return (
                 <div
@@ -90,9 +149,9 @@ export default function users ({ data }) {
                 </div>
               )
             })
-            : search.length >= 4 && searchData.length === 0
+            : search?.length >= 4 && searchData?.length === 0
               ? (<h1 className='flex justify-center'>No se encontraron resultados</h1>)
-              : data.data.map((user, index) => {
+              : data?.data?.map((user, index) => {
                 return (
                 <div
                   onClick={() => router.push(`/admin/users/${user._id}`)}
@@ -161,7 +220,7 @@ export default function users ({ data }) {
 }
 
 export async function getServerSideProps (context) {
-  const res = await fetch(`https://rz-group-backend-production.up.railway.app/api/user?skip=${context.query.page - 1}&limit=10`)
+  const res = await fetch(`http://localhost:3001/api/admin/users?skip=${context.query.page > 0 ? context.query.page - 1 : 0}&limit=10&roles=${context.query.roles}&isAproved=${context.query.isAproved}`)
   const data = await res.json()
   console.log(data)
   return {
