@@ -88,35 +88,35 @@ export default function users ({ data }) {
         <Nav location={'Detalles del Vehículo'}/>
         <div
           className={'font-bold mb-3 p-5 bg-white w-5/6 drop-shadow-2xl rounded-xl flex items-center flex-col justify-evenly'}>
-          <h1>Propietario: {data.owner.firstName} {data.owner.lastName}</h1>
+          <h1>Propietario: {data?.owner?.firstName} {data?.owner?.lastName}</h1>
         </div>
         <div className={'p-5 bg-white w-5/6 drop-shadow-2xl rounded-xl flex flex-col justify-evenly'}>
-          <h1>Marca: {data.brand}</h1>
-          <h1>Modelo: {data.model}</h1>
-          <h1>Tipo: {data.type}</h1>
-          <h1>Capacidad: {data.capacity} pasajeros</h1>
+          <h1>Marca: {data?.brand}</h1>
+          <h1>Modelo: {data?.model}</h1>
+          <h1>Tipo: {data?.type}</h1>
+          <h1>Capacidad: {data?.capacity} pasajeros</h1>
           <hr className={'m-3'}/>
-          <h1>Placa: {data.carPlate}</h1>
-          <h1>Año: {data.year}</h1>
-          <h1>Categoría: {data.category.toUpperCase()}</h1>
+          <h1>Placa: {data?.carPlate}</h1>
+          <h1>Año: {data?.year}</h1>
+          <h1>Categoría: {data?.category.toUpperCase()}</h1>
           <hr className={'m-3'}/>
-          <h1>Numero Interno: {data.numero_interno}</h1>
-          <h1>Tarjeta de Operación: {data.tarjeta_operacion}</h1>
+          <h1>Numero Interno: {data?.numero_interno}</h1>
+          <h1>Tarjeta de Operación: {data?.tarjeta_operacion}</h1>
         </div>
         <div
-          className={`font-bold mt-3 p-5 w-5/6 drop-shadow-2xl rounded-xl flex items-center flex-col justify-evenly ${data.isAproved === 'aproved' ? 'bg-green-400' : data.isAproved === 'inReview' ? 'bg-yellow-300' : 'bg-red-400'}`}>
-          <h1>ESTADO: {data.isAproved === 'aproved' ? 'APROBADO' : data.isAproved === 'notAproved' ? 'NO APROBADO' : 'PENDIENTE'}</h1>
+          className={`font-bold mt-3 p-5 w-5/6 drop-shadow-2xl rounded-xl flex items-center flex-col justify-evenly ${data?.isAproved === 'aproved' ? 'bg-green-400' : data?.isAproved === 'inReview' ? 'bg-yellow-300' : 'bg-red-400'}`}>
+          <h1>ESTADO: {data?.isAproved === 'aproved' ? 'APROBADO' : data?.isAproved === 'notAproved' ? 'NO APROBADO' : 'PENDIENTE'}</h1>
         </div>
         <div className={'flex flex-col w-full items-center'}>
           {
-            data.isAproved !== 'aproved'
-              ? <button onClick={() => router.push('/VehicleValidation/' + data._id)}
+            data?.isAproved !== 'aproved'
+              ? <button onClick={() => router.push('/VehicleValidation/' + data?._id)}
                         className={'bg-green-400 w-5/6 rounded-full mt-10 mb-5 h-[50px] font-bold'}>CARGAR DOCUMENTACIÓN
               </button>
               : null
           }
           {
-            data.isAproved === 'aproved'
+            data?.isAproved === 'aproved'
               ? <button onClick={() => autorizacionTab()}
                         className={tab === 1 ? 'bg-blue-900 w-5/6 rounded-xl mt-10 mb-5 h-[50px] font-bold text-white' : 'bg-blue-500 w-5/6 rounded-xl mt-10 mb-5 h-[50px] font-bold text-white'}>AUTORIZAR
                 CONDUCTOR
@@ -136,7 +136,7 @@ export default function users ({ data }) {
               : null
           }
           {
-            data.isAproved === 'aproved'
+            data?.isAproved === 'aproved'
               ? <button onClick={() => quitarAutorizacionTab()}
                         className={tab === 2 ? 'bg-blue-900 w-5/6 rounded-xl mt-10 mb-5 h-[50px] font-bold text-white' : 'bg-blue-500 w-5/6 rounded-xl mt-10 mb-5 h-[50px] font-bold text-white'}>QUITAR
                 AUTORIZACIÓN
@@ -155,12 +155,12 @@ export default function users ({ data }) {
               </div>
               : null
           }
-          <button onClick={() => dispatch(deleteVehicle(data._id, router))}
+          <button onClick={() => dispatch(deleteVehicle(data?._id, router))}
                   className={'bg-red-400 w-5/6 rounded-xl mt-5 h-[50px] font-bold'}>ELIMINAR
           </button>
           {
             !popUpMOD
-              ? data.isAproved === 'aproved'
+              ? data?.isAproved === 'aproved'
                 ? null
                 : <button onClick={() => setPopUpMOD(true)}
                           className={'bg-blue-400 w-5/6 rounded-xl mt-5 h-[50px] font-bold'}>MODIFICAR</button>
@@ -183,12 +183,20 @@ export default function users ({ data }) {
 }
 
 export async function getServerSideProps (context) {
-  const res = await fetch('https://rz-group-backend-production.up.railway.app/api/vehicles/' + context.query.id)
-  const data = await res.json()
-  console.log(data)
-  return {
-    props: {
-      data
+  try {
+    const res = await fetch('http://localhost:3001/api/vehicles/' + context.query.id)
+    const data = await res?.json()
+    console.log(data)
+    return {
+      props: {
+        data
+      }
     }
+  } catch (e) {
+   return {
+      props: {
+        data: null
+      }
+   }
   }
 }

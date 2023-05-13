@@ -9,7 +9,7 @@ export const RECOVER_PASSWORD = 'RECOVER_PASSWORD'
 
 export function signUp (obj, router) {
   return function (dispatch) {
-    toast.promise(axios.post('https://rz-group-backend-production.up.railway.app/api/auth/signup', obj), {
+    toast.promise(axios.post('http://localhost:3001/api/auth/signup', obj), {
       pending: 'Cargando...',
       success: 'Usuario creado con éxito',
       error: 'Error al crear usuario'
@@ -23,12 +23,12 @@ export function signUp (obj, router) {
       }, 2000)
     }).catch((err) => {
       // show a toast with the error
-      if (err.response.data.msg.includes('idNumber')) {
+      if (err.response?.data?.msg?.includes('idNumber')) {
         toast.error('El número de identificación ya existe')
-      } else if (err.response.data.msg.includes('phoneNumber')) {
+      } else if (err?.response?.data?.msg?.includes('phoneNumber')) {
         toast.error('El número de teléfono ya existe')
       } else {
-        toast.error(err.response.data.msg)
+        toast.error(err?.response?.data?.msg)
       }
     })
   }
@@ -36,7 +36,7 @@ export function signUp (obj, router) {
 export function signIn (obj, router) {
   return function (dispatch) {
     toast.promise(
-      axios.post('https://rz-group-backend-production.up.railway.app/api/auth/signin', obj), {
+      axios.post('http://localhost:3001/api/auth/signin', obj), {
         pending: 'Iniciando sesión...',
         success: 'Sesión iniciada con éxito',
         error: 'Error al iniciar sesión'
@@ -52,7 +52,7 @@ export function signIn (obj, router) {
           setTimeout(() => {
             router.push('/Verification')
           }, 2000)
-        } else if (res.data.roles === 'admin') {
+        } else if (res?.data?.roles === 'admin') {
           setTimeout(() => {
             router.push('/admin')
           }, 2000)
@@ -63,7 +63,7 @@ export function signIn (obj, router) {
         }
       }
       ).catch((err) => {
-        if (err.response.data.includes('password')) {
+        if (err?.response?.data?.includes('password')) {
           toast.error('Contraseña incorrecta')
         } else {
           toast.error('Ocurrió un error al iniciar sesión, intente de nuevo')
@@ -85,7 +85,7 @@ export function signOut () {
 
 export function sendOTP (obj, router = null) {
   return function (dispatch) {
-    axios.post('https://rz-group-backend-production.up.railway.app/api/auth/sendOTP', obj)
+    axios.post('http://localhost:3001/api/auth/sendOTP', obj)
       .then(res => {
         dispatch({
           type: SEND_OTP
@@ -101,7 +101,7 @@ export function sendOTP (obj, router = null) {
 
 export function verifyEmail (obj, router) {
   return function (dispatch) {
-    toast.promise(axios.post('https://rz-group-backend-production.up.railway.app/api/auth/verify', obj), {
+    toast.promise(axios.post('http://localhost:3001/api/auth/verify', obj), {
       pending: 'Verificando...',
       success: 'Email verificado con éxito',
       error: 'Error al verificar email'
@@ -122,7 +122,7 @@ export function verifyEmail (obj, router) {
 
 export function recoverPassword (obj, router) {
   return function (dispatch) {
-    axios.post('https://rz-group-backend-production.up.railway.app/api/auth/recovery', obj)
+    axios.post('http://localhost:3001/api/auth/recovery', obj)
       .then(res => {
         dispatch({
           type: RECOVER_PASSWORD

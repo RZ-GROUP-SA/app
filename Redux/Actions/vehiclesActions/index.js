@@ -9,7 +9,7 @@ export const GET_ALL_VEHICLES = 'GET_ALL_VEHICLES'
 
 export function createVehicle (obj, router) {
   return function (dispatch) {
-    axios.post('https://rz-group-backend-production.up.railway.app/api/vehicles/create', obj)
+    axios.post('http://localhost:3001/api/vehicles/create', obj)
       .then(res => {
         console.log(res.data)
         dispatch({
@@ -84,7 +84,7 @@ export function deleteVehicle (id, router) {
 
 export function getVehiclesByUser (id) {
   return function (dispatch) {
-    axios.get(`https://rz-group-backend-production.up.railway.app/api/user/vehicles/${id}`)
+    axios.get(`http://localhost:3001/api/user/vehicles/${id}`)
       .then(res => {
         console.log(res)
         dispatch({
