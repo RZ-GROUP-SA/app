@@ -15,7 +15,7 @@ export default function users ({ data }) {
     roles: ''
   })
   useEffect(() => {
-    search.length >= 4 && fetch('http://localhost:3001/api/admin/user/search?fullName=' + search)
+    search.length >= 4 && fetch('https://rz-group-backend-production.up.railway.app/api/admin/user/search?fullName=' + search)
       .then(res => res.json())
       .then(data => {
         setSearchData(data)
@@ -220,7 +220,7 @@ export default function users ({ data }) {
 }
 
 export async function getServerSideProps (context) {
-  const res = await fetch(`http://localhost:3001/api/admin/users?skip=${context.query.page > 0 ? context.query.page - 1 : 0}&limit=10&roles=${context.query.roles}&isAproved=${context.query.isAproved}`)
+  const res = await fetch(`https://rz-group-backend-production.up.railway.app/api/admin/users?skip=${context.query.page > 0 ? context.query.page - 1 : 0}&limit=10&roles=${context.query.roles}&isAproved=${context.query.isAproved}`)
   const data = await res.json()
   console.log(data)
   return {

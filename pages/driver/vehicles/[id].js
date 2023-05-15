@@ -184,7 +184,7 @@ export default function users ({ data }) {
 
 export async function getServerSideProps (context) {
   try {
-    const res = await fetch('http://localhost:3001/api/vehicles/' + context.query.id)
+    const res = await fetch('https://rz-group-backend-production.up.railway.app/api/vehicles/' + context.query.id)
     const data = await res?.json()
     console.log(data)
     return {

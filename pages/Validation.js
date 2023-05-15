@@ -55,7 +55,7 @@ export default function Validation () {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/user/${user.id}`)
+    axios.get(`https://rz-group-backend-production.up.railway.app/api/user/${user.id}`)
       .then(res => {
         setStatus(res.data.isAproved)
         console.log(res.data.isAproved)
@@ -116,7 +116,7 @@ export default function Validation () {
     formData.append('curso_aux', file5)
     formData.append('curso_ESNA', file6)
     formData.append('carta_auth', file7)
-    axios.post(`http://localhost:3001/api/user/upload/${user.id}`, formData, {
+    axios.post(`https://rz-group-backend-production.up.railway.app/api/user/upload/${user.id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
